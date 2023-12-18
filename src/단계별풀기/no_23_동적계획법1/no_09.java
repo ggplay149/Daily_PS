@@ -17,12 +17,14 @@ public class no_09 {
         count++;
         if(n==1) return count;
         else if (n % 3 == 0) {
-            dp[n] = dp_fn(n/3);
+            dp[n/3] = dp_fn(n/3);
+            return dp[n/3] ;
         } else if (n % 2 == 0) {
-            dp[n] = dp_fn(n/2);
+            dp[n/2] = dp_fn(n/2);
+            return dp[n/2];
         } else {
-            dp[n] = dp_fn(n-1);
+            dp[n-1] = dp_fn(n-1);
+            return dp[n-1];
         }
-        return 0;
     }
 }
