@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class no_05{
+    //연속합
 
     static Map<String,Integer> memo = new HashMap<>();
     static int  n;

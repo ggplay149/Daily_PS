@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class no_07 {
+    //정수 삼각형
     static int[][] dp;
     static int[][] input;
     static int max=-10000000;
