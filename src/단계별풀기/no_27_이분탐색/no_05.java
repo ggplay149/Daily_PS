@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class no_03 {
-    //랜선자르기
-    public static void main(String[] args) throws IOException{
+public class no_05 {
+    //공유기 설치
+    public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -17,32 +17,27 @@ public class no_03 {
         int m = Integer.parseInt(st.nextToken());
 
         long[] arr = new long[n];
-
-        for(int i = 0; i < n ; i ++ ){
+        for(int i = 0 ; i < n ; i ++){
             arr[i] = Long.parseLong(br.readLine());
         }
-
         Arrays.sort(arr);
+
         long start = 1;
         long end = arr[n-1];
-        long mid = 0;
-        long max = 0,sum=0;
 
         while(start<=end){
-
-            mid = (start+end)/2;
-            sum = 0;
-
-            for(long i : arr){
-                sum += (i/mid);
+            long mid = (start+end)/2;
+            int count = 1;
+            int position = 0;
+            for(int i = 1 ; i < n ; i ++){
+                if(arr[i]-arr[position]>=mid){
+                    position = i;
+                    count ++;
+                }
             }
-            if(sum >= m) {
-                max = mid;
-                start = mid+1;
-            }
+            if(count>=m) start = mid+1;
             else end = mid-1;
         }
-        if(sum < m) mid = max;
-        System.out.print(mid);
+        System.out.println(end);
     }
 }
