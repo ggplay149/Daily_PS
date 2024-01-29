@@ -70,23 +70,30 @@ public class no_02 {
     public static int Dijkstra(int from, int to) {
         Arrays.fill(minDistance, INF);
         minDistance[from] = 0;
-
-
+        //거리가 작은것을 우선순위로 두고 우선순위대로 꺼내줌
         PriorityQueue<Node> q = new PriorityQueue<>();
         q.add(new Node(from, 0));
 
 
         while (!q.isEmpty()) {
             Node temp = q.poll();
+            // 현재 노드
             int currNode = temp.end;
+            // 현재 노드까지 거리
             int currWeight = temp.weight;
             int nextNode = 0;
             int WeightToNextNode = 0;
+            //기록된 최소거리보다 큐에서 꺼내진 노드거리가 더 크면 진행 할 필요 없다.
             if(minDistance[currNode]<currWeight)continue;
             //if(minDistance[currNode]>currWeight) {
+            //현재노드에 연결되어 있는 모든 노드들 검사
             for (Node n : list[currNode]) {
+                    //연결된 노드
                     nextNode = n.end;
+                    //연결된 노드까지의 거리
                     WeightToNextNode = n.weight;
+                    //연결된 노드까지의 기록된 거리보다 현재까지의 거리 + 다음노드까지의 거리가 더작으면 최소치 교체,
+                    // 그리고 큐 추가
                     if (minDistance[nextNode] > currWeight + WeightToNextNode) {
                         minDistance[nextNode] = currWeight + WeightToNextNode;
                         q.add(new Node(nextNode, currWeight + WeightToNextNode));
