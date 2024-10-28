@@ -1,4 +1,4 @@
-package q200;
+package q200.재귀_분할정복_백트랙킹;
 
 import java.util.Scanner;
 
