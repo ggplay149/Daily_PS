@@ -1,4 +1,4 @@
-package 알고리즘다시준비.chp01_Array;
+package 알고리즘다시준비.chap01_배열;
 
 import java.io.BufferedReader;
 import java.io.IOException;
