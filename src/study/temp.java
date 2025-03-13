@@ -3,76 +3,36 @@ import java.util.*;
 import java.io.*;
 
 public class temp{
-
-    static class Node implements Comparable<Node> {
-
-        int index,cost;
-
-        public Node(int index, int cost){
-            this.index = index;
-            this.cost = cost;
-        }
-
-        @Override
-        public int compareTo(Node o){
-            return this.cost - o.cost;
-        }
-    }
-
-    static int V,E,start;
-    static ArrayList<Node>[] graph;
-    static int[] distance;
-
+    static int[][] board;
+    static int count=0;
     public static void main (String[] args) throws IOException{
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int r = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+        board = new int[(int)Math.pow(2,n)][(int)Math.pow(2,n)];
 
-        V = Integer.parseInt(st.nextToken());
-        E = Integer.parseInt(st.nextToken());
-        start = Integer.parseInt(br.readLine());
+        func(0,(int)Math.pow(2,n));
 
-        graph = new ArrayList[V+1];
-        distance = new int[V+1];
-
-        Arrays.fill(distance,Integer.MAX_VALUE);
-
-        for(int i = 1; i <=V ; i ++) graph[i] = new ArrayList<>();
-
-        for(int i  = 0 ; i < E ; i ++){
-            st = new StringTokenizer(br.readLine());
-            int fromNode = Integer.parseInt(st.nextToken());
-            int toNode = Integer.parseInt(st.nextToken());
-            int cost = Integer.parseInt(st.nextToken());
-            graph[fromNode].add(new Node(toNode,cost));
-        }
-
-
-        findRoute();
-        for(int i = 1 ; i <=V ; i ++){
-            if(distance[i] == Integer.MAX_VALUE)System.out.println("INF");
-            else System.out.println(distance[i]);
+        for(int i = 0; i < 8 ; i ++){
+            for(int j = 0; j < 8 ; j ++) {
+                System.out.print(board[i][j]+ " ");
+            }
+            System.out.println();
         }
     }
-
-    static void findRoute(){
-
-        PriorityQueue<Node> queue = new PriorityQueue<>();
-        queue.add(new Node(start,0));
-        distance[start] = 0;
-        while(!queue.isEmpty()){
-            Node current = queue.poll();
-            int currIdx = current.index;
-            int currCost = current.cost;
-            for(Node next : graph[currIdx]){
-                if(distance[currIdx]<currCost)continue;
-                int newCost = next.cost + currCost;
-                if(newCost<distance[next.index]){
-                    queue.add(new Node(next.index, newCost));
-                    distance[next.index] = newCost;
-                }
-            }
+    public static void func(int start, int end){
+        if(end/2 == 0){
+            System.out.println(">>>"+end);
+            board[start/2][end/2] = count++;
+            board[start/2][end] = count++;
+            board[start][end/2] = count++;
+            board[start][end] = count++;
+            return;
         }
+        func(start,end/2);
+
     }
 }
 
